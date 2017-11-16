@@ -48,11 +48,11 @@ category_to_color = {
     5:'y',
     6:'k',
     7:'w',
-    8:'xkcd:brown',
-    9:'xkcd:pink',
-    10:'xkcd:silver',
-    11:'xkcd:orange',
-    12:'xkcd:wheat'
+    8:'#A0522D',
+    9:'#FF69B4',
+    10:'#c0c0c0',
+    11:'#FFA500',
+    12:'#FFEBCD'
 }
 color = []
 for i in range(0, tsne.shape[0]):
@@ -61,9 +61,9 @@ for i in range(0, tsne.shape[0]):
     color.append(category_to_color[pred%13])    
 plt.scatter(tsne[:,0],tsne[:,1],c=color,marker='o',alpha=0.1)
 
-plt.savefig(os.path.join('..','results','restaurants_clustering_agglomerative_clustering.png'))
+plt.savefig(os.path.join('results','restaurants_clustering_agglomerative_clustering.png'))
 
 print "--SAVING THE RESTAURANTS' CATEGORIES IN DICT--"
-pickle.dump(restaurant_to_cluster,open(os.path.join('..','results','restaurant_to_cluster.pkl'),'wb'))
+pickle.dump(restaurant_to_cluster,open(os.path.join('results','restaurant_to_cluster.pkl'),'wb'))
 
 plt.show()

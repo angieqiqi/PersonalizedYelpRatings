@@ -15,18 +15,18 @@ def filtered_users(threshold):
                 user_to_number_reviews[review['user_id']]=1
             else:
                 user_to_number_reviews[review['user_id']] = user_to_number_reviews[review['user_id']]+1
-        pickle.dump(user_to_number_reviews,open('../results/user_to_number_reviews.pkl','wb'))
+        pickle.dump(user_to_number_reviews,open('results/user_to_number_reviews.pkl','wb'))
     else:
-        user_to_number_reviews = pickle.load(open(os.path.join('..','results','user_to_number_reviews.pkl'),'rb'))
+        user_to_number_reviews = pickle.load(open(os.path.join('results','user_to_number_reviews.pkl'),'rb'))
     return [key for key,value in user_to_number_reviews.iteritems() if value>=threshold]
 
-restaurant_to_cluster = pickle.load(open(os.path.join('..','results','restaurant_to_cluster.pkl'),'rb'))
+restaurant_to_cluster = pickle.load(open(os.path.join('results','restaurant_to_cluster.pkl'),'rb'))
 id_user = []
 filtered_users_array = filtered_users(20);
-pickle.dump(filtered_users_array,open(os.path.join('..','results','filtered_users.pkl'),'wb'))
+pickle.dump(filtered_users_array,open(os.path.join('results','filtered_users.pkl'),'wb'))
 
 dictionary_users = {}
-for line in open(os.path.join('..','data','filtered','review.json'),'rb'):
+for line in open(os.path.join('data','filtered','review.json'),'rb'):
     review = json.loads(line)
     if review['user_id'] in filtered_users_array:
         if not review['user_id'] in dictionary_users:
@@ -76,11 +76,11 @@ category_to_color = {
     5:'y',
     6:'k',
     7:'w',
-    8:'xkcd:brown',
-    9:'xkcd:pink',
-    10:'xkcd:silver',
-    11:'xkcd:orange',
-    12:'xkcd:wheat'
+    8:'#A0522D',
+    9:'#FF69B4',
+    10:'#c0c0c0',
+    11:'#FFA500',
+    12:'#FFEBCD'
 }
 color = []
 for i in range(0, tsne.shape[0]):
@@ -89,10 +89,10 @@ for i in range(0, tsne.shape[0]):
     color.append(category_to_color[pred])
 plt.scatter(tsne[:,0],tsne[:,1],c=color,marker='o',alpha=0.1)
 
-plt.savefig('../results/users_clustering_agglomerative_clustering.png')
+plt.savefig('results/users_clustering_agglomerative_clustering.png')
 
 print "--SAVING THE USERS' CATEGORIES IN DICT--"
-pickle.dump(user_to_cluster,open('../results/user_to_cluster.pkl','wb'))
+pickle.dump(user_to_cluster,open('results/user_to_cluster.pkl','wb'))
 
 plt.show()
 
