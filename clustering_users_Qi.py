@@ -7,9 +7,9 @@ from sklearn.manifold import TSNE
 import os
 
 def filtered_users(threshold):
-    if not os.path.exists(os.path.join('..','results','user_to_number_reviews.pkl')):
+    if not os.path.exists(os.path.join('results','user_to_number_reviews.pkl')):
         user_to_number_reviews = {}
-        for line in open(os.path.join('..','data','filtered','review.json'),'rb'):
+        for line in open(os.path.join('data','filtered','review.json'),'rb'):
             review = json.loads(line)
             if not review['user_id'] in user_to_number_reviews:
                 user_to_number_reviews[review['user_id']]=1
